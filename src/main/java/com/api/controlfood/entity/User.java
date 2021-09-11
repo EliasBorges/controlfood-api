@@ -33,4 +33,12 @@ public class User {
                 request.getPassword())
         ).id;
     }
+
+    public String update(UserRequest request, UserRepository repository) {
+        this.email = request.getEmail();
+        this.password = request.getPassword();
+
+        return repository.save(this).id;
+    }
+
 }

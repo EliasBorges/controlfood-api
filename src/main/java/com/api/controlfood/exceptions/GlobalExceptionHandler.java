@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 @Slf4j
@@ -56,4 +55,13 @@ public class GlobalExceptionHandler {
         log.info(exception.getMessage());
         return new ExceptionResponse(env.getProperty(exception.getMessage()));
     }
+
+    @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler({UserNotFoundException.class})
+    public @ResponseBody
+    ExceptionResponse handlerBusinessRules(UserNotFoundException exception) {
+        log.info(exception.getMessage());
+        return new ExceptionResponse(env.getProperty(exception.getMessage()));
+    }
+
 }

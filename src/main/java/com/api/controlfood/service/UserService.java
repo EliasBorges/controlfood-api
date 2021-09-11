@@ -2,12 +2,17 @@ package com.api.controlfood.service;
 
 import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.UserRequest;
+import com.api.controlfood.controller.dto.response.UserIdResponse;
 import com.api.controlfood.entity.User;
 import com.api.controlfood.exceptions.UserExistException;
+import com.api.controlfood.exceptions.UserNotFoundException;
 import com.api.controlfood.repository.UserRepository;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import static java.lang.String.format;
 
 @AllArgsConstructor
 @Service
@@ -21,5 +26,20 @@ public class UserService implements IUserService {
         }
 
         return User.create(request, repository);
+    }
+
+    public String update(String id, UserRequest request) {
+        User user = repository.findById(id).orElseThrow(() -> {
+            log.error("User not update, user = {} not found", id);
+
+            throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
+        });
+
+        log.info("Update user, id = {}, userBefore = {}, userAfter = {}",
+                id,
+                request,
+                user);
+
+        return user.update(request, repository);
     }
 }
