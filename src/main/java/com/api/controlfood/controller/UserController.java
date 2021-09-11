@@ -23,7 +23,7 @@ public class UserController {
         return new UserIdResponse(service.create(request));
     }
 
-    @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/{id}")
     public UserIdResponse update(@PathVariable String id,
                                       @Valid @RequestBody UserRequest request) {
         return new UserIdResponse(service.update(id, request));
