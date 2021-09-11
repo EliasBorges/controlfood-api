@@ -41,4 +41,7 @@ public class User {
         return repository.save(this).id;
     }
 
+    public void delete(User user, UserRepository repository) {
+        repository.delete(user);
+    }
 }

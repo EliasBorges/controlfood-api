@@ -42,4 +42,16 @@ public class UserService implements IUserService {
 
         return user.update(request, repository);
     }
+
+    public void delete(String id){
+        User user = repository.findById(id).orElseThrow(() -> {
+            log.error("User not update, user = {} not found", id);
+
+            throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
+        });
+
+        log.info("Delete user = {}", user);
+
+        user.delete(user, repository);
+    }
 }
