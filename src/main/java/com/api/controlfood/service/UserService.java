@@ -8,6 +8,8 @@ import com.api.controlfood.exceptions.UserNotFoundException;
 import com.api.controlfood.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -18,6 +20,8 @@ public class UserService implements IUserService {
 
     public String create(UserRequest request) {
         if (repository.existsByEmail(request.getEmail())) {
+            log.error("[USER] - Not create, email user = {} exists", request.getEmail());
+
             throw new UserExistException(ControlFoodMessage.VALIDATION_EMAIL_ALREADY_EXISTS);
         }
 
@@ -26,12 +30,12 @@ public class UserService implements IUserService {
 
     public String update(String id, UserRequest request) {
         User user = repository.findById(id).orElseThrow(() -> {
-            log.error("User not update, user = {} not found", id);
+            log.error("[USER] - Not update, id user = {} not found", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
 
-        log.info("Update user, id = {}, userBefore = {}, userAfter = {}",
+        log.info("[USER] - Update user, id = {}, userBefore = {}, userAfter = {}",
                 id,
                 request,
                 user);
@@ -41,21 +45,25 @@ public class UserService implements IUserService {
 
     public void delete(String id) {
         User user = repository.findById(id).orElseThrow(() -> {
-            log.error("User not update, user = {} not found", id);
+            log.error("[USER] - Not update, id user = {} not found", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
 
-        log.info("Delete user = {}", user);
+        log.info("[USER] - Delete user = {}", user);
 
         user.delete(user, repository);
     }
 
-    public User findByEmail(String email) {
-        return repository.findByEmail(email).orElseThrow(() -> {
-            log.error("User not found, cpf User = {} not found", email);
+    public User findById(String id) {
+        return repository.findById(id).orElseThrow(() -> {
+            log.error("[USER] - Not found, id User = {} not found", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
+    }
+
+    public Page<User> findAll(Pageable page) {
+        return repository.findAll(page);
     }
 }
