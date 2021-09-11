@@ -1,5 +1,6 @@
 package com.api.controlfood.service;
 
+import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.UserRequest;
 import com.api.controlfood.entity.User;
 import com.api.controlfood.exceptions.UserExistException;
@@ -16,7 +17,7 @@ public class UserService implements IUserService {
 
     public String create(UserRequest request) {
         if (repository.existsByEmail(request.getEmail())) {
-            throw new UserExistException("validation.email.already.exists");
+            throw new UserExistException(ControlFoodMessage.VALIDATION_EMAIL_ALREADY_EXISTS);
         }
 
         return User.create(request, repository);
