@@ -28,7 +28,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public static String create(UserRequest request, UserRepository repository, PasswordEncoder passwordEncoder) {
+    public static String create(
+            UserRequest request,
+            UserRepository repository,
+            PasswordEncoder passwordEncoder
+    ) {
         return repository.save(new User(
                 UUID.randomUUID().toString(),
                 request.getEmail(),
@@ -36,13 +40,20 @@ public class User {
         ).id;
     }
 
-    public String updatePassword(UserUpdateRequest request, UserRepository repository) {
-        this.password = request.getPassword();
+    public String updatePassword(
+            UserUpdateRequest request,
+            UserRepository repository,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.password = passwordEncoder.encode(request.getPassword());
 
         return repository.save(this).id;
     }
 
-    public void delete(User user, UserRepository repository) {
+    public void delete(
+            User user,
+            UserRepository repository
+    ) {
         repository.delete(user);
     }
 }

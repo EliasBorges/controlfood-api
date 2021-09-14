@@ -44,7 +44,7 @@ public class UserService implements IUserService {
                 request,
                 user);
 
-        return user.updatePassword(request, repository);
+        return user.updatePassword(request, repository, passwordEncoder);
     }
 
     public void delete(String id) {
