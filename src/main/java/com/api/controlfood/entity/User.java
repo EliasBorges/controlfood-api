@@ -6,6 +6,7 @@ import com.api.controlfood.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,11 +28,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public static String create(UserRequest request, UserRepository repository) {
+    public static String create(UserRequest request, UserRepository repository, PasswordEncoder passwordEncoder) {
         return repository.save(new User(
                 UUID.randomUUID().toString(),
                 request.getEmail(),
-                request.getPassword())
+                passwordEncoder.encode(request.getPassword()))
         ).id;
     }
 

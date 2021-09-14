@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
     private final UserRepository repository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public String create(UserRequest request) {
         if (repository.existsByEmail(request.getEmail())) {
             log.error("[USER] - Not create, email user = {} exists", request.getEmail());
@@ -26,7 +29,7 @@ public class UserService implements IUserService {
             throw new UserExistException(ControlFoodMessage.VALIDATION_EMAIL_ALREADY_EXISTS);
         }
 
-        return User.create(request, repository);
+        return User.create(request, repository, passwordEncoder);
     }
 
     public String updatePassword(String id, UserUpdateRequest request) {
