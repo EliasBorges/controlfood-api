@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
+    private String id;
     private String email;
-    private String password;
 
     public static UserResponse fromUser(User user) {
         return new UserResponse(
-                user.getEmail(),
-                user.getPassword());
+                user.getId(),
+                user.getEmail());
     }
 }

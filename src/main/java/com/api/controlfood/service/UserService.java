@@ -2,6 +2,7 @@ package com.api.controlfood.service;
 
 import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.UserRequest;
+import com.api.controlfood.controller.dto.request.UserUpdateRequest;
 import com.api.controlfood.entity.User;
 import com.api.controlfood.exceptions.UserExistException;
 import com.api.controlfood.exceptions.UserNotFoundException;
@@ -28,7 +29,7 @@ public class UserService implements IUserService {
         return User.create(request, repository);
     }
 
-    public String update(String id, UserRequest request) {
+    public String updatePassword(String id, UserUpdateRequest request) {
         User user = repository.findById(id).orElseThrow(() -> {
             log.error("[USER] - Not update, id user = {} not found", id);
 
@@ -40,7 +41,7 @@ public class UserService implements IUserService {
                 request,
                 user);
 
-        return user.update(request, repository);
+        return user.updatePassword(request, repository);
     }
 
     public void delete(String id) {

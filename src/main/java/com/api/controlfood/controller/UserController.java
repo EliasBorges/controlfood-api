@@ -1,6 +1,7 @@
 package com.api.controlfood.controller;
 
 import com.api.controlfood.controller.dto.request.UserRequest;
+import com.api.controlfood.controller.dto.request.UserUpdateRequest;
 import com.api.controlfood.controller.dto.response.UserIdResponse;
 import com.api.controlfood.controller.dto.response.UserResponse;
 import com.api.controlfood.service.IUserService;
@@ -29,11 +30,11 @@ public class UserController {
 
     @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
-    public UserIdResponse update(
+    public UserIdResponse updatePassword(
             @PathVariable String id,
-            @Valid @RequestBody UserRequest request
+            @Valid @RequestBody UserUpdateRequest request
     ) {
-        return new UserIdResponse(service.update(id, request));
+        return new UserIdResponse(service.updatePassword(id, request));
     }
 
     @ResponseStatus(NO_CONTENT)
@@ -44,7 +45,9 @@ public class UserController {
 
     @ResponseStatus(OK)
     @GetMapping(value = "/{id}")
-    public UserResponse findById(@PathVariable String id) {
+    public UserResponse findById(
+            @PathVariable String id
+    ) {
         return UserResponse.fromUser(service.findById(id));
     }
 

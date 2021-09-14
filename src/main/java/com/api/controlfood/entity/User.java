@@ -1,6 +1,7 @@
 package com.api.controlfood.entity;
 
 import com.api.controlfood.controller.dto.request.UserRequest;
+import com.api.controlfood.controller.dto.request.UserUpdateRequest;
 import com.api.controlfood.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,8 +35,7 @@ public class User {
         ).id;
     }
 
-    public String update(UserRequest request, UserRepository repository) {
-        this.email = request.getEmail();
+    public String updatePassword(UserUpdateRequest request, UserRepository repository) {
         this.password = request.getPassword();
 
         return repository.save(this).id;
