@@ -1,10 +1,10 @@
-version: '3.1'
+version: '3.4'
 services:
-  dbpostgresql:
-    image: postgres
-    ports:
-      - "5432:5432"
+  db:
+    image: mysql
     environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=controlfood
+      - MYSQL_DATABASE=controlfood
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3306:3306
