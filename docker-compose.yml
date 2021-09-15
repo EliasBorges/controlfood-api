@@ -3,8 +3,8 @@ services:
   db:
     image: mysql
     environment:
-      - MYSQL_DATABASE=trail
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=controlfood
+      - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_ROOT_HOST=%
     ports:
       - 3306:3306
