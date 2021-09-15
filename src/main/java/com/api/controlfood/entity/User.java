@@ -11,12 +11,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="tb_user")
 public class User {
     @Id
     @Column(updatable = false, unique = true, nullable = false, name = "id_user")
