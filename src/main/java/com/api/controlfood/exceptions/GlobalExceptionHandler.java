@@ -1,6 +1,5 @@
 package com.api.controlfood.exceptions;
 
-import com.api.controlfood.controller.dto.request.commons.ExceptionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;

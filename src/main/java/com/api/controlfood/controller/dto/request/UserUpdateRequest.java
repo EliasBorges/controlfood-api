@@ -12,6 +12,9 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode
 @ToString
 public class UserUpdateRequest {
+    @NotBlank(message = "{validation.blank}")
+    private String name;
+
     @Size(min = 8, max = 16, message = "{validation.size}")
     @NotBlank(message = "{validation.blank}")
     private String password;

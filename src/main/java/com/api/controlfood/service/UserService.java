@@ -9,8 +9,6 @@ import com.api.controlfood.exceptions.UserNotFoundException;
 import com.api.controlfood.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -65,9 +63,5 @@ public class UserService implements IUserService {
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
-    }
-
-    public Page<User> findAll(Pageable page) {
-        return repository.findAll(page);
     }
 }

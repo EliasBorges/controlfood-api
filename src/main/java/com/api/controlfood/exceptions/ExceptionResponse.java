@@ -1,4 +1,4 @@
-package com.api.controlfood.controller.dto.request.commons;
+package com.api.controlfood.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
