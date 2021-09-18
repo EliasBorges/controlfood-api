@@ -5,17 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
-import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
@@ -31,21 +28,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public @ResponseBody
-    List<ExceptionResponse> handlerMethodArgumentNotValidException(
+    ExceptionResponse handlerMethodArgumentNotValidException(
             MethodArgumentNotValidException exception) {
-
-        List<ExceptionResponse> validationErrors = new ArrayList<>();
-
-        for (ObjectError error : exception.getBindingResult().getAllErrors()) {
-
-            if (nonNull(error.getCodes()) && nonNull(error.getCodes()[STR_FIELD_NAME])) {
-                validationErrors.add(new ExceptionResponse(
-                        error.getDefaultMessage()
-                ));
-            }
-        }
-
-        return validationErrors;
+        return new ExceptionResponse(
+                Objects.requireNonNull(exception.getBindingResult()
+                                .getFieldError())
+                        .getDefaultMessage()
+        );
     }
 
     @ResponseStatus(UNPROCESSABLE_ENTITY)
