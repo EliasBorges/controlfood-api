@@ -1,15 +1,11 @@
 package com.api.controlfood.service;
 
+import com.api.controlfood.controller.dto.request.ProductRequest;
 
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-/*
 public interface IProductService {
-    String create(Product request);
+    String create(ProductRequest request);
 
-    String update(String id, Product request);
+/*    String update(String id, Product request);
 
     void delete(String id);
 
@@ -17,6 +13,5 @@ public interface IProductService {
 
     Page<Product> findAll(Pageable page);
 
-    Product findProductFeasibility (String id);
+    Product findProductFeasibility (String id);*/
 }
-*/

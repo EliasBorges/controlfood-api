@@ -1,17 +1,16 @@
 package com.api.controlfood.controller;
 
+import com.api.controlfood.controller.dto.request.ProductRequest;
+import com.api.controlfood.controller.dto.response.IdResponse;
+import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.data.domain.Sort.Direction.ASC;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
 
-/*@AllArgsConstructor
+@AllArgsConstructor
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -19,11 +18,11 @@ public class ProductController {
 
     @ResponseStatus(CREATED)
     @PostMapping
-    public String create(@Valid @RequestBody Product request) {
-        return service.create(request);
+    public IdResponse create(@Valid @RequestBody ProductRequest request) {
+        return new IdResponse(service.create(request));
     }
 
-    @ResponseStatus(OK)
+/*    @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
     public String update(
             @PathVariable String id,
@@ -56,5 +55,5 @@ public class ProductController {
                     Pageable page
     ) {
         return service.findAll(page).map(UserResponse::fromUser);
-    }
-}*/
+    }*/
+}
