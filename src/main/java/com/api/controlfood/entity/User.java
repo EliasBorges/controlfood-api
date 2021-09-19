@@ -24,6 +24,9 @@ public class User {
     @Column(updatable = false, unique = true, nullable = false, name = "id_user")
     private String id;
 
+    @Column(nullable = false)
+    private String name;
+
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -37,16 +40,18 @@ public class User {
     ) {
         return repository.save(new User(
                 UUID.randomUUID().toString(),
+                request.getName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()))
         ).id;
     }
 
-    public String updatePassword(
+    public String update(
             UserUpdateRequest request,
             UserRepository repository,
             PasswordEncoder passwordEncoder
     ) {
+        this.name = request.getName();
         this.password = passwordEncoder.encode(request.getPassword());
 
         return repository.save(this).id;

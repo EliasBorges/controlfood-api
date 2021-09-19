@@ -14,6 +14,9 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode
 @ToString
 public class UserRequest {
+    @NotBlank(message = "{validation.blank}")
+    private String name;
+
     @Email(message = "{validation.invalid.email}")
     @NotBlank(message = "{validation.blank}")
     private String email;

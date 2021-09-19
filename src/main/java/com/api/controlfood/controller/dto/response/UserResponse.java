@@ -10,11 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponse {
     private String id;
+    private String name;
     private String email;
 
     public static UserResponse fromUser(User user) {
         return new UserResponse(
                 user.getId(),
+                user.getName(),
                 user.getEmail());
     }
 }

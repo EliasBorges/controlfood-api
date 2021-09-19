@@ -9,8 +9,6 @@ import com.api.controlfood.exceptions.UserNotFoundException;
 import com.api.controlfood.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +30,7 @@ public class UserService implements IUserService {
         return User.create(request, repository, passwordEncoder);
     }
 
-    public String updatePassword(String id, UserUpdateRequest request) {
+    public String update(String id, UserUpdateRequest request) {
         User user = repository.findById(id).orElseThrow(() -> {
             log.error("[USER] - Not update, id user = {} not found", id);
 
@@ -44,12 +42,12 @@ public class UserService implements IUserService {
                 request,
                 user);
 
-        return user.updatePassword(request, repository, passwordEncoder);
+        return user.update(request, repository, passwordEncoder);
     }
 
     public void delete(String id) {
         User user = repository.findById(id).orElseThrow(() -> {
-            log.error("[USER] - Not update, id user = {} not found", id);
+            log.error("[USER] - Not delete, id user = {} not found", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
@@ -65,9 +63,5 @@ public class UserService implements IUserService {
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
-    }
-
-    public Page<User> findAll(Pageable page) {
-        return repository.findAll(page);
     }
 }
