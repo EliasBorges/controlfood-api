@@ -26,11 +26,11 @@ public class UserController {
 
     @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
-    public UserIdResponse updatePassword(
+    public UserIdResponse update(
             @PathVariable String id,
             @Valid @RequestBody UserUpdateRequest request
     ) {
-        return new UserIdResponse(service.updatePassword(id, request));
+        return new UserIdResponse(service.update(id, request));
     }
 
     @ResponseStatus(NO_CONTENT)

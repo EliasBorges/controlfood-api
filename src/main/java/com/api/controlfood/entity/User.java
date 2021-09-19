@@ -46,7 +46,7 @@ public class User {
         ).id;
     }
 
-    public String updatePassword(
+    public String update(
             UserUpdateRequest request,
             UserRepository repository,
             PasswordEncoder passwordEncoder

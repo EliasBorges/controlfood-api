@@ -30,7 +30,7 @@ public class UserService implements IUserService {
         return User.create(request, repository, passwordEncoder);
     }
 
-    public String updatePassword(String id, UserUpdateRequest request) {
+    public String update(String id, UserUpdateRequest request) {
         User user = repository.findById(id).orElseThrow(() -> {
             log.error("[USER] - Not update, id user = {} not found", id);
 
@@ -42,12 +42,12 @@ public class UserService implements IUserService {
                 request,
                 user);
 
-        return user.updatePassword(request, repository, passwordEncoder);
+        return user.update(request, repository, passwordEncoder);
     }
 
     public void delete(String id) {
         User user = repository.findById(id).orElseThrow(() -> {
-            log.error("[USER] - Not update, id user = {} not found", id);
+            log.error("[USER] - Not delete, id user = {} not found", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });
