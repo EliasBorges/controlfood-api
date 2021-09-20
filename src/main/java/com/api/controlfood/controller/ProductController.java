@@ -2,15 +2,18 @@ package com.api.controlfood.controller;
 
 import com.api.controlfood.controller.dto.request.ProductRequest;
 import com.api.controlfood.controller.dto.response.IdResponse;
+import com.api.controlfood.controller.dto.response.ProductResponse;
 import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.data.domain.Sort.Direction.ASC;
+import static org.springframework.http.HttpStatus.*;
 
 @AllArgsConstructor
 @RestController
@@ -39,34 +42,24 @@ public class ProductController {
         service.delete(id);
     }
 
-/*    @ResponseStatus(OK)
-    @PutMapping(value = "/{id}")
-    public String update(
-            @PathVariable String id,
-            @Valid @RequestBody Product request
-    ) {
-        return service.update(id, request);
-    }
-
-
-
     @ResponseStatus(OK)
     @GetMapping(value = "/{id}")
-    public Product findById(
+    public ProductResponse findById(
             @PathVariable String id
     ) {
-        return UserResponse.fromUser(service.findById(id));
+        return ProductResponse.fromProduct(service.findById(id));
     }
 
     @ResponseStatus(OK)
     @GetMapping
-    public Page<Product> findAll(
+    public Page<ProductResponse> findAll(
             @PageableDefault(
-                    sort = "email",
+                    sort = "name",
                     direction = ASC,
-                    size = 20)
+                    size = 20
+            )
                     Pageable page
     ) {
-        return service.findAll(page).map(UserResponse::fromUser);
-    }*/
+        return service.findAll(page).map(ProductResponse::fromProduct);
+    }
 }

@@ -59,7 +59,7 @@ public class UserService implements IUserService {
 
     public User findById(String id) {
         return repository.findById(id).orElseThrow(() -> {
-            log.error("[USER] - Not found, id User = {} not found", id);
+            log.error("[USER] - Not found, id User = {}", id);
 
             throw new UserNotFoundException(ControlFoodMessage.USER_NOT_FOUND);
         });

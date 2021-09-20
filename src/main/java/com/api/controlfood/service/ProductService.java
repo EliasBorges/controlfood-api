@@ -7,6 +7,8 @@ import com.api.controlfood.exceptions.ProductNotFoundException;
 import com.api.controlfood.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -44,5 +46,17 @@ public class ProductService implements IProductService{
         log.info("[PRODUCT] - Delete product = {}", product);
 
         product.delete(product, repository);
+    }
+
+    public Product findById(String id) {
+        return repository.findById(id).orElseThrow(() -> {
+            log.error("[PRODUCT] - Not found, id product = {}", id);
+
+            throw new ProductNotFoundException(ControlFoodMessage.PRODUCT_NOT_FOUND);
+        });
+    }
+
+    public Page<Product> findAll(Pageable page) {
+        return repository.findAll(page);
     }
 }
