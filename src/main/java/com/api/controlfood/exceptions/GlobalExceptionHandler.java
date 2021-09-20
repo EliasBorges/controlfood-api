@@ -52,4 +52,11 @@ public class GlobalExceptionHandler {
         return new ExceptionResponse(env.getProperty(exception.getMessage()));
     }
 
+    @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler({ProductNotFoundException.class})
+    public @ResponseBody
+    ExceptionResponse handlerBusinessRules(ProductNotFoundException exception) {
+        log.info(exception.getMessage());
+        return new ExceptionResponse(env.getProperty(exception.getMessage()));
+    }
 }

@@ -44,4 +44,23 @@ public class Product {
                 request.getCostValue()
         )).id;
     }
+
+    public String update(
+            ProductRequest request,
+            ProductRepository repository
+    ) {
+        this.name = request.getName();
+        this.description = request.getDescribe();
+        this.saleValue = request.getSaleValue();
+        this.costValue = request.getCostValue();
+
+        return repository.save(this).id;
+    }
+
+    public void delete(
+            Product product,
+            ProductRepository repository
+    ) {
+        repository.delete(product);
+    }
 }

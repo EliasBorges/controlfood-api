@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @AllArgsConstructor
 @RestController
@@ -22,11 +24,11 @@ public class ProductController {
         return new IdResponse(service.create(request));
     }
 
-/*    @ResponseStatus(OK)
+    @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
     public String update(
             @PathVariable String id,
-            @Valid @RequestBody Product request
+            @Valid @RequestBody ProductRequest request
     ) {
         return service.update(id, request);
     }
@@ -36,6 +38,17 @@ public class ProductController {
     public void delete(@PathVariable String id) {
         service.delete(id);
     }
+
+/*    @ResponseStatus(OK)
+    @PutMapping(value = "/{id}")
+    public String update(
+            @PathVariable String id,
+            @Valid @RequestBody Product request
+    ) {
+        return service.update(id, request);
+    }
+
+
 
     @ResponseStatus(OK)
     @GetMapping(value = "/{id}")
