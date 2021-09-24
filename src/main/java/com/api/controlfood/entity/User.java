@@ -21,7 +21,7 @@ import java.util.UUID;
 @Table(name="tb_user")
 public class User {
     @Id
-    @Column(updatable = false, unique = true, nullable = false, name = "id_user")
+    @Column(updatable = false, unique = true, nullable = false)
     private String id;
 
     @Column(nullable = false)

@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Product {
     @Id
-    @Column(updatable = false, unique = true, nullable = false, name = "id_product")
+    @Column(updatable = false, unique = true, nullable = false)
     private String id;
 
     @Column(nullable = false)
@@ -26,10 +26,10 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "Double default 0", name = "sale_value")
     private Double saleValue;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "Double default 0", name = "cost_value")
     private Double costValue;
 
     public static String create(
