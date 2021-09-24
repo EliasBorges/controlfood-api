@@ -1,4 +1,4 @@
-package com.api.controlfood.controller.dto.request;
+package com.api.controlfood.controller.dto.request.user;
 
 import lombok.*;
 

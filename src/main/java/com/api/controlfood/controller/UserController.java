@@ -1,9 +1,9 @@
 package com.api.controlfood.controller;
 
-import com.api.controlfood.controller.dto.request.UserRequest;
-import com.api.controlfood.controller.dto.request.UserUpdateRequest;
-import com.api.controlfood.controller.dto.response.IdResponse;
-import com.api.controlfood.controller.dto.response.UserResponse;
+import com.api.controlfood.controller.dto.request.user.UserRequest;
+import com.api.controlfood.controller.dto.request.user.UserUpdateRequest;
+import com.api.controlfood.controller.dto.response.base.IdResponse;
+import com.api.controlfood.controller.dto.response.user.UserResponse;
 import com.api.controlfood.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package com.api.controlfood.controller;
 
-import com.api.controlfood.controller.dto.request.ProductRequest;
-import com.api.controlfood.controller.dto.response.IdResponse;
-import com.api.controlfood.controller.dto.response.ProductResponse;
+import com.api.controlfood.controller.dto.request.product.ProductRequest;
+import com.api.controlfood.controller.dto.response.base.IdResponse;
+import com.api.controlfood.controller.dto.response.product.ProductResponse;
 import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

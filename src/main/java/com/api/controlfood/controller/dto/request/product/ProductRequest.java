@@ -1,4 +1,4 @@
-package com.api.controlfood.controller.dto.request;
+package com.api.controlfood.controller.dto.request.product;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.api.controlfood.controller.dto.response;
+package com.api.controlfood.controller.dto.response.user;
 
 import com.api.controlfood.entity.User;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.api.controlfood.service;
 
-import com.api.controlfood.controller.dto.request.ProductRequest;
+import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

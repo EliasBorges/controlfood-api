@@ -1,6 +1,6 @@
 package com.api.controlfood.entity;
 
-import com.api.controlfood.controller.dto.request.ProductRequest;
+import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

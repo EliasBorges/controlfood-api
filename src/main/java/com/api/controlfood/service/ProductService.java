@@ -1,7 +1,7 @@
 package com.api.controlfood.service;
 
 import com.api.controlfood.ControlFoodMessage;
-import com.api.controlfood.controller.dto.request.ProductRequest;
+import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.entity.Product;
 import com.api.controlfood.exceptions.ProductNotFoundException;
 import com.api.controlfood.repository.ProductRepository;
