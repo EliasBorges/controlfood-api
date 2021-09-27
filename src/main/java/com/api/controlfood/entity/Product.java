@@ -26,10 +26,10 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false, columnDefinition = "Double default 0", name = "sale_value")
+    @Column(nullable = false, name = "sale_value")
     private Double saleValue;
 
-    @Column(nullable = false, columnDefinition = "Double default 0", name = "cost_value")
+    @Column(nullable = false, name = "cost_value")
     private Double costValue;
 
     public static String create(
