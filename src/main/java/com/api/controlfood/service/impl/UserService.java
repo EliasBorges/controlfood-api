@@ -1,4 +1,4 @@
-package com.api.controlfood.service;
+package com.api.controlfood.service.impl;
 
 import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.user.UserRequest;
@@ -7,6 +7,7 @@ import com.api.controlfood.entity.User;
 import com.api.controlfood.exceptions.UserExistException;
 import com.api.controlfood.exceptions.UserNotFoundException;
 import com.api.controlfood.repository.UserRepository;
+import com.api.controlfood.service.IUserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

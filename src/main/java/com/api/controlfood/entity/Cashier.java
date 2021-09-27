@@ -21,9 +21,15 @@ public class Cashier {
     @Column(nullable = false)
     private LocalDate date;
 
+    @Column(nullable = false)
+    private Boolean open;
+
     @Column(name = "opening_balance", nullable = false)
     private Double openingBalance;
 
     @Column(name = "total_expense_amount", nullable = false)
     private Double totalExpenseAmount;
+
+    @Column(name = "total_sale", nullable = false)
+    private Double totalSale;
 }

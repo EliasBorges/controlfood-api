@@ -1,10 +1,11 @@
-package com.api.controlfood.service;
+package com.api.controlfood.service.impl;
 
 import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.entity.Product;
 import com.api.controlfood.exceptions.ProductNotFoundException;
 import com.api.controlfood.repository.ProductRepository;
+import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
     private final ProductRepository repository;
 
     public String create(ProductRequest request) {
