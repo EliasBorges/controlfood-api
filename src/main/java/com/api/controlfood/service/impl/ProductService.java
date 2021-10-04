@@ -57,6 +57,14 @@ public class ProductService implements IProductService {
         });
     }
 
+    public Product findByName(String name) {
+        return repository.findByNameContaining(name).orElseThrow(() -> {
+            log.error("[PRODUCT] - Not found, name product = {}", name);
+
+            throw new ProductNotFoundException(ControlFoodMessage.PRODUCT_NOT_FOUND);
+        });
+    }
+
     public Page<Product> findAll(Pageable page) {
         return repository.findAll(page);
     }

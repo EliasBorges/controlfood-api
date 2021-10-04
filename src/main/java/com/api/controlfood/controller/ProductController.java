@@ -51,6 +51,14 @@ public class ProductController {
     }
 
     @ResponseStatus(OK)
+    @GetMapping(value = "/name")
+    public ProductResponse findByName(
+            @RequestParam("name") String name
+    ) {
+        return ProductResponse.fromProduct(service.findByName(name));
+    }
+
+    @ResponseStatus(OK)
     @GetMapping
     public Page<ProductResponse> findAll(
             @PageableDefault(
