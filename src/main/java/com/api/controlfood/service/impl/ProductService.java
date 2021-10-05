@@ -4,6 +4,7 @@ import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.entity.Product;
 import com.api.controlfood.exceptions.ProductNotFoundException;
+import com.api.controlfood.exceptions.SalueValueLessThanCostValueException;
 import com.api.controlfood.repository.ProductRepository;
 import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class ProductService implements IProductService {
     private final ProductRepository repository;
 
     public String create(ProductRequest request) {
+        validSalueValue(request);
         return Product.create(request, repository);
     }
 
@@ -28,6 +30,8 @@ public class ProductService implements IProductService {
 
             throw new ProductNotFoundException(ControlFoodMessage.PRODUCT_NOT_FOUND);
         });
+
+        validSalueValue(request);
 
         log.info("[PRODUCT] - Update product, id = {}, productBefore = {}, productAfter = {}",
                 id,
@@ -67,5 +71,14 @@ public class ProductService implements IProductService {
 
     public Page<Product> findAll(Pageable page) {
         return repository.findAll(page);
+    }
+
+    private void validSalueValue(ProductRequest request) {
+        if (request.getSaleValue() <= request.getCostValue()) {
+            log.error("[PRODUCT] - Salue value {} less than cost value {}",
+                    request.getSaleValue(), request.getCostValue());
+
+            throw new SalueValueLessThanCostValueException(ControlFoodMessage.SALUE_VALUE_BOTTOM_COST_VALUE);
+        }
     }
 }
