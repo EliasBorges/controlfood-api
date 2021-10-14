@@ -1,14 +1,13 @@
 package com.api.controlfood.entity;
 
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
+import com.api.controlfood.enums.TypeProduct;
 import com.api.controlfood.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -32,6 +31,10 @@ public class Product {
     @Column(nullable = false, name = "cost_value")
     private Double costValue;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TypeProduct type;
+
     public static String create(
             ProductRequest request,
             ProductRepository repository
@@ -41,7 +44,8 @@ public class Product {
                 request.getName(),
                 request.getDescribe(),
                 request.getSaleValue(),
-                request.getCostValue()
+                request.getCostValue(),
+                request.getType()
         )).id;
     }
 
@@ -53,6 +57,7 @@ public class Product {
         this.description = request.getDescribe();
         this.saleValue = request.getSaleValue();
         this.costValue = request.getCostValue();
+        this.type = request.getType();
 
         return repository.save(this).id;
     }

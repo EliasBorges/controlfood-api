@@ -1,6 +1,7 @@
 package com.api.controlfood.controller.dto.response.product;
 
 import com.api.controlfood.entity.Product;
+import com.api.controlfood.enums.TypeProduct;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public class ProductResponse {
     private String description;
     private Double saleValue;
     private Double costValue;
+    private TypeProduct type;
 
     public static ProductResponse fromProduct(Product product) {
         return new ProductResponse(
@@ -21,6 +23,7 @@ public class ProductResponse {
                 product.getName(),
                 product.getDescription(),
                 product.getSaleValue(),
-                product.getCostValue());
+                product.getCostValue(),
+                product.getType());
     }
 }

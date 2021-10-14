@@ -1,10 +1,13 @@
 package com.api.controlfood.controller.dto.request.product;
 
+import com.api.controlfood.enums.TypeProduct;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 
 @Getter
@@ -23,4 +26,8 @@ public class ProductRequest {
 
     @Positive(message = "{validation.positive}")
     private Double costValue;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{validation.blank}")
+    private TypeProduct type;
 }
