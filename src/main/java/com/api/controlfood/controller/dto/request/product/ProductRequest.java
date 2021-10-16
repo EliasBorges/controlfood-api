@@ -1,5 +1,6 @@
 package com.api.controlfood.controller.dto.request.product;
 
+import com.api.controlfood.entity.FeedStock;
 import com.api.controlfood.enums.TypeProduct;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import lombok.ToString;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -30,4 +32,7 @@ public class ProductRequest {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "{validation.blank}")
     private TypeProduct type;
+
+    @NotNull(message = "{validation.blank}")
+    private List<FeedStock> stocks;
 }

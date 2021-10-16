@@ -1,9 +1,9 @@
 package com.api.controlfood.controller;
 
-import com.api.controlfood.controller.dto.request.product.ProductRequest;
+import com.api.controlfood.controller.dto.request.feedstock.FeedStockRequest;
+import com.api.controlfood.controller.dto.response.feedstock.FeedStockResponse;
 import com.api.controlfood.controller.dto.response.base.IdResponse;
-import com.api.controlfood.controller.dto.response.product.ProductResponse;
-import com.api.controlfood.service.IProductService;
+import com.api.controlfood.service.IFeedStock;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +17,13 @@ import static org.springframework.http.HttpStatus.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/products")
-public class ProductController {
-    private final IProductService service;
+@RequestMapping("/stocks")
+public class FeedStockController {
+    private final IFeedStock service;
 
     @ResponseStatus(CREATED)
     @PostMapping
-    public IdResponse create(@Valid @RequestBody ProductRequest request) {
+    public IdResponse create(@Valid @RequestBody FeedStockRequest request){
         return new IdResponse(service.create(request));
     }
 
@@ -31,8 +31,8 @@ public class ProductController {
     @PutMapping(value = "/{id}")
     public IdResponse update(
             @PathVariable String id,
-            @Valid @RequestBody ProductRequest request
-    ) {
+            @Valid @RequestBody FeedStockRequest request
+            ){
         return new IdResponse(service.update(id, request));
     }
 
@@ -43,24 +43,8 @@ public class ProductController {
     }
 
     @ResponseStatus(OK)
-    @GetMapping(value = "/{id}")
-    public ProductResponse findById(
-            @PathVariable String id
-    ) {
-        return ProductResponse.fromProduct(service.findById(id));
-    }
-
-    @ResponseStatus(OK)
-    @GetMapping(value = "/name")
-    public ProductResponse findByName(
-            @RequestParam("name") String name
-    ) {
-        return ProductResponse.fromProduct(service.findByName(name));
-    }
-
-    @ResponseStatus(OK)
     @GetMapping
-    public Page<ProductResponse> findAll(
+    public Page<FeedStockResponse> findAll(
             @PageableDefault(
                     sort = "name",
                     direction = ASC,
@@ -68,6 +52,6 @@ public class ProductController {
             )
                     Pageable page
     ) {
-        return service.findAll(page).map(ProductResponse::fromProduct);
+        return service.findAll(page).map(FeedStockResponse::fromStock);
     }
 }

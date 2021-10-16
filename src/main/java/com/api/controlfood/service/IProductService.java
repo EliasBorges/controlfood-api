@@ -17,6 +17,4 @@ public interface IProductService {
     Product findByName(String name);
 
     Page<Product> findAll(Pageable page);
-
-    /*  Product findProductFeasibility (String id);*/
 }

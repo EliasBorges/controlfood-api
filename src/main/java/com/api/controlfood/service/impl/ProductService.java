@@ -50,7 +50,7 @@ public class ProductService implements IProductService {
 
         log.info("[PRODUCT] - Delete product = {}", product);
 
-        product.delete(product, repository);
+        product.delete(repository);
     }
 
     public Product findById(String id) {

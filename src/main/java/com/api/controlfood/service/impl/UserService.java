@@ -55,7 +55,7 @@ public class UserService implements IUserService {
 
         log.info("[USER] - Delete user = {}", user);
 
-        user.delete(user, repository);
+        user.delete(repository);
     }
 
     public User findById(String id) {

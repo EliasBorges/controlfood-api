@@ -60,6 +60,14 @@ public class GlobalExceptionHandler {
         return new ExceptionResponse(env.getProperty(exception.getMessage()));
     }
 
+    @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler({FeedStockNotFoundException.class})
+    public @ResponseBody
+    ExceptionResponse handlerBusinessRules(FeedStockNotFoundException exception) {
+        log.info(exception.getMessage());
+        return new ExceptionResponse(env.getProperty(exception.getMessage()));
+    }
+
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler({SalueValueLessThanCostValueException.class})
     public @ResponseBody

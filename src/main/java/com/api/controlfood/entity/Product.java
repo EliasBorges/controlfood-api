@@ -3,11 +3,14 @@ package com.api.controlfood.entity;
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.enums.TypeProduct;
 import com.api.controlfood.repository.ProductRepository;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,6 +38,11 @@ public class Product {
     @Column(nullable = false)
     private TypeProduct type;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @ToString.Exclude
+    private List<FeedStock> stocks;
+
     public static String create(
             ProductRequest request,
             ProductRepository repository
@@ -45,7 +53,8 @@ public class Product {
                 request.getDescribe(),
                 request.getSaleValue(),
                 request.getCostValue(),
-                request.getType()
+                request.getType(),
+                request.getStocks()
         )).id;
     }
 
@@ -63,9 +72,8 @@ public class Product {
     }
 
     public void delete(
-            Product product,
             ProductRepository repository
     ) {
-        repository.delete(product);
+        repository.delete(this);
     }
 }
