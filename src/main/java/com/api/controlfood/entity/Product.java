@@ -4,10 +4,8 @@ import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.enums.TypeProduct;
 import com.api.controlfood.repository.ProductRepository;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +15,7 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Product {
     @Id
     @Column(updatable = false, unique = true, nullable = false)
@@ -38,13 +37,14 @@ public class Product {
     @Column(nullable = false)
     private TypeProduct type;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     @ToString.Exclude
     private List<FeedStock> stocks;
 
     public static String create(
             ProductRequest request,
+            List<FeedStock> stocks,
             ProductRepository repository
     ){
         return repository.save(new Product(
@@ -54,12 +54,13 @@ public class Product {
                 request.getSaleValue(),
                 request.getCostValue(),
                 request.getType(),
-                request.getStocks()
+                stocks
         )).id;
     }
 
     public String update(
             ProductRequest request,
+            List<FeedStock> stocks,
             ProductRepository repository
     ) {
         this.name = request.getName();
@@ -67,13 +68,16 @@ public class Product {
         this.saleValue = request.getSaleValue();
         this.costValue = request.getCostValue();
         this.type = request.getType();
+        this.stocks = stocks;
 
         return repository.save(this).id;
     }
 
+    @Transactional
     public void delete(
             ProductRepository repository
     ) {
+        this.getStocks().removeAll(this.getStocks());
         repository.delete(this);
     }
 }
