@@ -127,30 +127,9 @@ public class ProductService implements IProductService {
             throw new ProductNotFoundException(ControlFoodMessage.PRODUCT_NOT_FOUND);
         });
 
-        Double valorComPercentualMinimoRecomendado = product.getCostValue() + (0.26 * product.getCostValue());
+        return calculateDiscount(product);
 
-       //Double valorComPercentualMaximoRecomendado = product.getCostValue() + (0.28 * product.getCostValue());
-
-        if (product.getSaleValue() >= valorComPercentualMinimoRecomendado) {
-
-            Double valorDesconto = product.getSaleValue() - valorComPercentualMinimoRecomendado;
-
-            return new DiscountMarginByProductResponse(
-                    "Você pode dar um desconto de ate R$" +
-                            new DecimalFormat("##.##")
-                                    .format(valorDesconto) + " neste produto."
-            );
-        } else {
-            Double valorDesconto = product.getSaleValue() - valorComPercentualMinimoRecomendado;
-
-            return new DiscountMarginByProductResponse(
-                    "Você esta tendo um prejuizo neste produto de R$" +
-                            new DecimalFormat("##.##")
-                                    .format(valorDesconto)
-                                    .replace("-", "")
-            );
-        }
-
+        //Double valorComPercentualMaximoRecomendado = product.getCostValue() + (0.28 * product.getCostValue());
 
 /*        if (valorComPercentualMaximoRecomendado > product.getSaleValue() ||
                 product.getSaleValue() > valorComPercentualMaximoRecomendado) {
@@ -171,7 +150,6 @@ public class ProductService implements IProductService {
             }
 
         }*/
-
     }
 
     private void validSalueValue(ProductRequest request) {
@@ -180,6 +158,26 @@ public class ProductService implements IProductService {
                     request.getSaleValue(), request.getCostValue());
 
             throw new SalueValueLessThanCostValueException(ControlFoodMessage.SALUE_VALUE_BOTTOM_COST_VALUE);
+        }
+    }
+
+    private DiscountMarginByProductResponse calculateDiscount(Product product) {
+        Double minimumValueSale = product.getCostValue() + (0.26 * product.getCostValue());
+        Double discountValue = product.getSaleValue() - minimumValueSale;
+
+        if (product.getSaleValue() >= minimumValueSale) {
+            return new DiscountMarginByProductResponse(
+                    "Você pode dar um desconto de ate R$" +
+                            new DecimalFormat("##.##")
+                                    .format(discountValue) + " neste produto."
+            );
+        } else {
+            return new DiscountMarginByProductResponse(
+                    "Você esta tendo um prejuizo neste produto de R$" +
+                            new DecimalFormat("##.##")
+                                    .format(discountValue)
+                                    .replace("-", "")
+            );
         }
     }
 }
