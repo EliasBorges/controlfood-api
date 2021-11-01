@@ -2,6 +2,7 @@ package com.api.controlfood.service.impl;
 
 import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
+import com.api.controlfood.controller.dto.response.product.DiscountMarginByProductResponse;
 import com.api.controlfood.entity.FeedStock;
 import com.api.controlfood.entity.Product;
 import com.api.controlfood.exceptions.FeedStockNotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +117,61 @@ public class ProductService implements IProductService {
 
     public Page<Product> findAll(Pageable page) {
         return repository.findAll(page);
+    }
+
+    public DiscountMarginByProductResponse findDiscountMarginByProduct(String id) {
+
+        Product product = repository.findById(id).orElseThrow(() -> {
+            log.error("[PRODUCT] - Not found, id product = {}", id);
+
+            throw new ProductNotFoundException(ControlFoodMessage.PRODUCT_NOT_FOUND);
+        });
+
+        Double valorComPercentualMinimoRecomendado = product.getCostValue() + (0.26 * product.getCostValue());
+
+       //Double valorComPercentualMaximoRecomendado = product.getCostValue() + (0.28 * product.getCostValue());
+
+        if (product.getSaleValue() >= valorComPercentualMinimoRecomendado) {
+
+            Double valorDesconto = product.getSaleValue() - valorComPercentualMinimoRecomendado;
+
+            return new DiscountMarginByProductResponse(
+                    "Você pode dar um desconto de ate R$" +
+                            new DecimalFormat("##.##")
+                                    .format(valorDesconto) + " neste produto."
+            );
+        } else {
+            Double valorDesconto = product.getSaleValue() - valorComPercentualMinimoRecomendado;
+
+            return new DiscountMarginByProductResponse(
+                    "Você esta tendo um prejuizo neste produto de R$" +
+                            new DecimalFormat("##.##")
+                                    .format(valorDesconto)
+                                    .replace("-", "")
+            );
+        }
+
+
+/*        if (valorComPercentualMaximoRecomendado > product.getSaleValue() ||
+                product.getSaleValue() > valorComPercentualMaximoRecomendado) {
+
+            Double valorDesconto = product.getSaleValue() - valorComPercentualMaximoRecomendado;
+
+            if (valorDesconto > 0) {
+                return new DiscountMarginByProductResponse(
+                        "Você pode dar um desconto de ate R$" + new DecimalFormat("##.##").format(valorDesconto) + " neste produto."
+                );
+            } else {
+                return new DiscountMarginByProductResponse(
+                        "Você esta tendo um prejuizo neste produto de R$" +
+                                new DecimalFormat("##.##")
+                                        .format(valorDesconto)
+                                        .replace("-", "")
+                );
+            }
+
+        }*/
+
     }
 
     private void validSalueValue(ProductRequest request) {

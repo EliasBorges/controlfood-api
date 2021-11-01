@@ -2,6 +2,7 @@ package com.api.controlfood.controller;
 
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.controller.dto.response.base.IdResponse;
+import com.api.controlfood.controller.dto.response.product.DiscountMarginByProductResponse;
 import com.api.controlfood.controller.dto.response.product.ProductResponse;
 import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
@@ -69,5 +70,11 @@ public class ProductController {
                     Pageable page
     ) {
         return service.findAll(page).map(ProductResponse::fromProduct);
+    }
+
+    @ResponseStatus(OK)
+    @GetMapping(value = "{id}/discount")
+    public DiscountMarginByProductResponse findDiscountMarginByProduct(@PathVariable String id) {
+        return service.findDiscountMarginByProduct(id);
     }
 }
