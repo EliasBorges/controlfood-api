@@ -23,12 +23,14 @@ public class ProductController {
 
     @ResponseStatus(CREATED)
     @PostMapping
+    @CrossOrigin
     public IdResponse create(@Valid @RequestBody ProductRequest request) {
         return new IdResponse(service.create(request));
     }
 
     @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
+    @CrossOrigin
     public String update(
             @PathVariable String id,
             @Valid @RequestBody ProductRequest request
@@ -38,12 +40,14 @@ public class ProductController {
 
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping(value = "/{id}")
+    @CrossOrigin
     public void delete(@PathVariable String id) {
         service.delete(id);
     }
 
     @ResponseStatus(OK)
     @GetMapping(value = "/{id}")
+    @CrossOrigin
     public ProductResponse findById(
             @PathVariable String id
     ) {
@@ -52,6 +56,7 @@ public class ProductController {
 
     @ResponseStatus(OK)
     @GetMapping
+    @CrossOrigin
     public Page<ProductResponse> findAll(
             @PageableDefault(
                     sort = "name",
