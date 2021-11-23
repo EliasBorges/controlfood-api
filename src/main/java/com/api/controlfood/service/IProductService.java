@@ -1,6 +1,7 @@
 package com.api.controlfood.service;
 
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
+import com.api.controlfood.controller.dto.response.product.DiscountMarginByProductResponse;
 import com.api.controlfood.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,9 @@ public interface IProductService {
 
     Product findById(String id);
 
+    Product findByName(String name);
+
     Page<Product> findAll(Pageable page);
 
-    /*  Product findProductFeasibility (String id);*/
+    DiscountMarginByProductResponse findDiscountMarginByProduct(String id);
 }

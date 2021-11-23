@@ -58,9 +58,8 @@ public class User {
     }
 
     public void delete(
-            User user,
             UserRepository repository
     ) {
-        repository.delete(user);
+        repository.delete(this);
     }
 }

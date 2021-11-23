@@ -2,6 +2,7 @@ package com.api.controlfood.controller;
 
 import com.api.controlfood.controller.dto.request.product.ProductRequest;
 import com.api.controlfood.controller.dto.response.base.IdResponse;
+import com.api.controlfood.controller.dto.response.product.DiscountMarginByProductResponse;
 import com.api.controlfood.controller.dto.response.product.ProductResponse;
 import com.api.controlfood.service.IProductService;
 import lombok.AllArgsConstructor;
@@ -29,11 +30,11 @@ public class ProductController {
 
     @ResponseStatus(OK)
     @PutMapping(value = "/{id}")
-    public String update(
+    public IdResponse update(
             @PathVariable String id,
             @Valid @RequestBody ProductRequest request
     ) {
-        return service.update(id, request);
+        return new IdResponse(service.update(id, request));
     }
 
     @ResponseStatus(NO_CONTENT)
@@ -51,6 +52,14 @@ public class ProductController {
     }
 
     @ResponseStatus(OK)
+    @GetMapping(value = "/name")
+    public ProductResponse findByName(
+            @RequestParam("name") String name
+    ) {
+        return ProductResponse.fromProduct(service.findByName(name));
+    }
+
+    @ResponseStatus(OK)
     @GetMapping
     public Page<ProductResponse> findAll(
             @PageableDefault(
@@ -61,5 +70,11 @@ public class ProductController {
                     Pageable page
     ) {
         return service.findAll(page).map(ProductResponse::fromProduct);
+    }
+
+    @ResponseStatus(OK)
+    @GetMapping(value = "{id}/discount")
+    public DiscountMarginByProductResponse findDiscountMarginByProduct(@PathVariable String id) {
+        return service.findDiscountMarginByProduct(id);
     }
 }
