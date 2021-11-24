@@ -2,17 +2,6 @@
 
 #### FUNÇÃO
 - `Gerenciador de estabelecimentos no setor alimentício.` Tem como objetivo auxiliar o empreendedor a entrar e permanecer neste mundo de deliveries, proporcionando dados do produto que permitem tomadas de decisão assertivas de forma rápida e inteligente.
-- Sistema é contemplado pelas seguintes entidades:
-
-1. USUÁRIO
-    - Entidade responsável pelo gerenciamento de acessos ao sistema (Atualmente este acesso parte do pressuposto que apenas o Gerente tem acesso);
-
-#### ESPECIFICAÇÃO DA IMPLEMENTAÇÃO
-
-1. USUÁRIO
-    - Nesta service temos um CRUD básico, sem nenhuma regra de negocio especifica.
-      - **Métodos implementados:** `createUser` 
-      - **Métodos previsto para implementação:** `alterUser - searchUserByEmail - deleteUser - findAllUsers`
 
 #### ARQUITETURA DO PROJETO
 ![Arquitetura_ControlFood](https://user-images.githubusercontent.com/31020103/132262242-f3f547f5-d35e-45f4-a07c-1fb14b20bed4.png)
@@ -34,5 +23,4 @@
 #### AUTORES
 
 - [Elias Borges](https://www.linkedin.com/in/eliasborges)
-- [Ricardo](https://www.linkedin.com/in/)
 
