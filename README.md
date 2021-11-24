@@ -18,7 +18,6 @@
 * [Hibernate Validator](https://hibernate.org/validator/)
 * [Loombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
 * [Swagger](https://swagger.io/)
-* [JUnit](https://mvnrepository.com/artifact/junit/junit)
 
 #### AUTORES
 
