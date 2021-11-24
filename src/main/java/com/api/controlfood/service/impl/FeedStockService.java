@@ -4,6 +4,7 @@ import com.api.controlfood.ControlFoodMessage;
 import com.api.controlfood.controller.dto.request.feedstock.FeedStockRequest;
 import com.api.controlfood.entity.FeedStock;
 import com.api.controlfood.exceptions.FeedStockNotFoundException;
+import com.api.controlfood.exceptions.ProductNotFoundException;
 import com.api.controlfood.repository.FeedStockRepository;
 import com.api.controlfood.service.IFeedStock;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,14 @@ public class FeedStockService implements IFeedStock {
         log.info("[FEEDSTOCK] - Delete feed stock = {}", stock);
 
         stock.delete(repository);
+    }
+
+    public FeedStock findById(String id) {
+        return repository.findById(id).orElseThrow(() -> {
+            log.error("[FEEDSTOCK] - Not found, id feedstock = {}", id);
+
+            throw new FeedStockNotFoundException(ControlFoodMessage.FEED_STOCK_NOT_FOUND);
+        });
     }
 
     public Page<FeedStock> findAll(Pageable page) {

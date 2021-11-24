@@ -13,5 +13,7 @@ public interface IFeedStock {
 
     void delete(String id);
 
+    FeedStock findById(String id);
+
     Page<FeedStock> findAll(Pageable page);
 }

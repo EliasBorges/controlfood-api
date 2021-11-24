@@ -54,4 +54,12 @@ public class FeedStockController {
     ) {
         return service.findAll(page).map(FeedStockResponse::fromStock);
     }
+
+    @ResponseStatus(OK)
+    @GetMapping(value = "/{id}")
+    public FeedStockResponse findById(
+            @PathVariable String id
+    ) {
+        return FeedStockResponse.fromStock(service.findById(id));
+    }
 }
