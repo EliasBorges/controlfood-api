@@ -18,7 +18,7 @@
 ![Arquitetura_ControlFood](https://user-images.githubusercontent.com/31020103/132262242-f3f547f5-d35e-45f4-a07c-1fb14b20bed4.png)
 
 #### RELACIONAMENTOS - UML
-![ControlFood](https://user-images.githubusercontent.com/31020103/132262056-45bbc93d-3b89-444a-b380-ce6395f41498.jpg)
+![ControlFood](https://user-images.githubusercontent.com/31020103/143155987-67c057b9-ce85-450f-87d6-deaba5eb4c22.jpg)
 
 #### PRINCIPAIS BIBLIOTECAS UTILIZADAS PARA EXECUÇÃO DO PROJETO:
 
