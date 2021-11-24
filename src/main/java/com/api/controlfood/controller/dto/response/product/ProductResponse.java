@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class ProductResponse {
     private String id;
     private String name;
-    private String description;
+    private String describe;
     private Double saleValue;
     private Double costValue;
     private TypeProduct type;
