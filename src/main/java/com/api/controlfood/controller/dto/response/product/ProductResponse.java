@@ -28,14 +28,26 @@ public class ProductResponse {
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
-                product.getSaleValue(),
-                product.getCostValue(),
+                Double.parseDouble(
+                        String.valueOf(
+                                System.out.format("%05.2f \t| \n", product.getSaleValue())
+                        )
+                ),
+                Double.parseDouble(
+                        String.valueOf(
+                                System.out.format("%05.2f \t| \n", product.getCostValue())
+                        )
+                ),
                 product.getType(),
                 product.getStocks()
                         .stream()
                         .map(FeedStockProductResponse::fromStock)
                         .collect(Collectors.toList()),
-                FeedStockProductResponse.amount(product.getStocks())
+                Double.parseDouble(
+                        String.valueOf(
+                                System.out.format("%05.2f \t| \n", FeedStockProductResponse.amount(product.getStocks()))
+                        )
+                )
         );
     }
 }

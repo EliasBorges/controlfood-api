@@ -15,17 +15,19 @@ public class FeedStockProductResponse {
     private String name;
     private String value;
 
-    public static FeedStockProductResponse fromStock(FeedStock stock){
+    public static FeedStockProductResponse fromStock(FeedStock stock) {
         return new FeedStockProductResponse(
                 stock.getName(),
-                "R$" + stock.getValue()
+                String.valueOf(
+                        System.out.format("R$%05.2f \t| \n", stock.getValue())
+                )
         );
     }
 
-    public static Double amount(List<FeedStock> stocks){
+    public static Double amount(List<FeedStock> stocks) {
         AtomicReference<Double> amount = new AtomicReference<>(0.0);
 
-        stocks.forEach(stock ->  {
+        stocks.forEach(stock -> {
             amount.updateAndGet(v -> v + stock.getValue());
         });
 
