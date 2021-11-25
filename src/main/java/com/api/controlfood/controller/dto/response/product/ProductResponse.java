@@ -17,8 +17,8 @@ public class ProductResponse {
     private String id;
     private String name;
     private String describe;
-    private Double saleValue;
-    private Double costValue;
+    private String saleValue;
+    private String costValue;
     private TypeProduct type;
     private List<FeedStockProductResponse> stocks;
     private Double amountStocks;
@@ -28,16 +28,13 @@ public class ProductResponse {
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
-                Double.parseDouble(
-                        String.valueOf(
-                                System.out.format("%05.2f \t| \n", product.getSaleValue())
-                        )
+                String.valueOf(
+                        System.out.format("%05.2f \t| \n", product.getSaleValue())
                 ),
-                Double.parseDouble(
-                        String.valueOf(
-                                System.out.format("%05.2f \t| \n", product.getCostValue())
-                        )
-                ),
+                String.valueOf(
+                        System.out.format("%05.2f \t| \n", product.getCostValue())
+                )
+                ,
                 product.getType(),
                 product.getStocks()
                         .stream()
