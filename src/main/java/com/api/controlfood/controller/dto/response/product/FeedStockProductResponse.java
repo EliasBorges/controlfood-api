@@ -18,8 +18,7 @@ public class FeedStockProductResponse {
     public static FeedStockProductResponse fromStock(FeedStock stock){
         return new FeedStockProductResponse(
                 stock.getName(),
-                System.out.format("R$%05.2f \t| \n", stock.getValue()).toString()
-
+                "R$" + stock.getValue()
         );
     }
 
