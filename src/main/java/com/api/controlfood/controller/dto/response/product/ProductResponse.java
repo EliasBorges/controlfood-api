@@ -21,6 +21,7 @@ public class ProductResponse {
     private Double costValue;
     private TypeProduct type;
     private List<FeedStockProductResponse> stocks;
+    private Double amountStocks;
 
     public static ProductResponse fromProduct(Product product) {
         return new ProductResponse(
@@ -33,7 +34,8 @@ public class ProductResponse {
                 product.getStocks()
                         .stream()
                         .map(FeedStockProductResponse::fromStock)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                FeedStockProductResponse.amount(product.getStocks())
         );
     }
 }
