@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DiscountMarginByProductResponse {
     private String value;
+    private Boolean isPositive;
 }

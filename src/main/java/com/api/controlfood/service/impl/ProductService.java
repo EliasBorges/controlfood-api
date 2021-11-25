@@ -169,14 +169,16 @@ public class ProductService implements IProductService {
             return new DiscountMarginByProductResponse(
                     "Você pode dar um desconto de ate R$" +
                             new DecimalFormat("##.##")
-                                    .format(discountValue) + " neste produto."
+                                    .format(discountValue) + " neste produto.",
+                    true
             );
         } else {
             return new DiscountMarginByProductResponse(
                     "Você esta tendo um prejuizo neste produto de R$" +
                             new DecimalFormat("##.##")
                                     .format(discountValue)
-                                    .replace("-", "")
+                                    .replace("-", ""),
+                    false
             );
         }
     }
