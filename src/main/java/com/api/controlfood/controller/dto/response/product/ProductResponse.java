@@ -17,8 +17,8 @@ public class ProductResponse {
     private String id;
     private String name;
     private String describe;
-    private String saleValue;
-    private String costValue;
+    private Double saleValue;
+    private Double costValue;
     private TypeProduct type;
     private List<FeedStockProductResponse> stocks;
     private Double amountStocks;
@@ -28,23 +28,14 @@ public class ProductResponse {
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
-                String.valueOf(
-                        System.out.format("%05.2f \t| \n", product.getSaleValue())
-                ),
-                String.valueOf(
-                        System.out.format("%05.2f \t| \n", product.getCostValue())
-                )
-                ,
+                product.getSaleValue(),
+                product.getCostValue(),
                 product.getType(),
                 product.getStocks()
                         .stream()
                         .map(FeedStockProductResponse::fromStock)
                         .collect(Collectors.toList()),
-                Double.parseDouble(
-                        String.valueOf(
-                                System.out.format("%05.2f \t| \n", FeedStockProductResponse.amount(product.getStocks()))
-                        )
-                )
+                FeedStockProductResponse.amount(product.getStocks())
         );
     }
 }
