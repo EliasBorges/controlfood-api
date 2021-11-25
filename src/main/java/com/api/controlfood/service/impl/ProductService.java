@@ -47,7 +47,7 @@ public class ProductService implements IProductService {
                     stocks.add(feedStock);
                 });
 
-        validSalueValue(request);
+        //validSalueValue(request);
 
         return Product.create(request, stocks, repository);
     }
